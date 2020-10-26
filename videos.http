@@ -1,7 +1,8 @@
+### all my videos
 GET http://localhost:4000/videos
 
-###
-GET http://localhost:4000/videos/1
+### Only 1 video
+GET http://localhost:4000/videos/5f966809604c5c39bc180183
 
 ### Create a video
 POST http://localhost:4000/videos
@@ -13,8 +14,13 @@ Content-Type: application/json
     "url": "https://www.youtube.com/watch?v=_RZ-T6TxP7w&t"
 }
 
-###
-PUT http://localhost:4000/videos/1
+### update a video
+PUT http://localhost:4000/videos/5f966809604c5c39bc180183
+Content-Type: application/json
 
-###
-DELETE http://localhost:4000/videos/1
+{
+    "title": "hi"
+}
+
+### Delete
+DELETE http://localhost:4000/videos/5f95710e58aa3239643917ca

@@ -18,20 +18,27 @@ export const getVideos:RequestHandler = async (req,res) => {
         return res.json({ videos });
     } catch (error) {
         console.log(error);
-        res.status(500).send('There was an error while getting the posted videos');
+        res.json(error);
+        //res.status(500).send('There was an error while getting the posted videos');
     }
 };
 
-export const getVideo:RequestHandler = (req,res) => {
-    res.json('this is only one get videos')
+export const getVideo:RequestHandler = async (req,res) => {
+    const videoFound = await Video.findById(req.params.id);
+    if (!videoFound) return res.status(204).json({msg: 'Not video founded'});
+    res.json(videoFound);
 };
 
-export const deleteVideo:RequestHandler = (req,res) => {
-    res.json('this is deleting videos')
+export const deleteVideo:RequestHandler = async (req,res) => {
+    const videoDeleted = await Video.findByIdAndDelete(req.params.id);
+    if (!videoDeleted) return res.status(204).json({msg: 'Not video was deleted'});
+    res.json(videoDeleted);
 };
 
-export const updateVideo:RequestHandler = (req,res) => {
-    res.json('this is updating videos')
+export const updateVideo:RequestHandler = async (req,res) => {
+    const videoUpdate = await Video.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    if (!videoUpdate) return res.status(204).json();
+    res.json(videoUpdate);
 };
 
 /* const Task = require('../models/Task');
